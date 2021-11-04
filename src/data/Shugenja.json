@@ -1,0 +1,52 @@
+{
+    "Years": [
+        {
+            "Spring":[
+                {
+                    "Title": "Ghost Animals",
+                    "Rumor": "Kids are dissappearing and stealing their family's rice.",
+                    "Text": "Ghostly Animals are luring children into the woods, along with their familiy's rice supply. The families face starvation in the winter if nothing is done.",
+                    "Challenges":[
+                        {
+                            "Keywords":["Otherworldly"],
+                            "Difficulty": 2,
+                            "Consequence":"Discard 1 Earth Ring"
+                        },
+                        {
+                            "Keywords": ["Mortal", "Otherworldly"],
+                            "Difficulty": 3,
+                            "Consequence": "Problem Persists"
+                        },
+                        {
+                            "Keywords": ["Mortal", "Nature"],
+                            "Difficulty": 2,
+                            "Consequence": "Mark \"Reduced Rice Stores\""
+                        }
+                    ]
+                },
+                {
+                    "Title":"Ghost Animals",
+                    "Rumor":"Kids are dissappearing and stealing their family's rice.",
+                    "Text":"Ghostly Animals are luring children into the woods, along with their familiy's rice supply. The families face starvation in the winter if nothing is done.",
+                    "Challenges":[
+                        {
+                            "Keywords":["Otherworldly"],
+                            "Difficulty":2,
+                            "Consequence":"Discard 1 Earth Ring"
+                        },
+                        {
+                            "Keywords":["Mortal", "Otherworldly"],
+                            "Difficulty":3,
+                            "Consequence":"Problem Persists"
+                        },
+                        {
+                            "Keywords":["Mortal", "Nature"],
+                            "Difficulty":2,
+                            "Consequence":"Mark \"Reduced Rice Stores\""
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

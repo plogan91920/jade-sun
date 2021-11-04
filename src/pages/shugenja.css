@@ -1,0 +1,53 @@
+#shugenja-summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    background-image: url('../assets/PaperBack.jpg');
+    background-repeat: repeat;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#keyword-summary h1 {
+    text-align: center;
+}
+
+#region-summary h1 {
+    text-align: center;
+}
+
+table {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 15px;
+    background-color: white;
+}
+
+th {
+    border: 1px solid black;
+    border-bottom: 2px solid black;
+    padding: 10px;
+    background-color: #ddd;
+}
+
+td {
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+td:not(:first-child) {
+    text-align: center;
+}

@@ -1,0 +1,21 @@
+.page {
+    margin: auto;
+    display: block;
+    width: 10.5in;
+    height: 8in;
+    padding: 0.25in;
+}
+
+.page:nth-child(2n+1) {
+    transform: scaleX(-1)
+}
+
+.page:nth-child(2n+1) .card {
+    transform: scaleX(-1);
+}
+
+.page:nth-child(2n+1) .card .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
