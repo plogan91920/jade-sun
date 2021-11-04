@@ -1,5 +1,14 @@
+@font-face { font-family: BrushStrokes; src: url('./assets/Brush-Strokes.ttf'); } 
+
 .App {
-  text-align: center;
+  position: relative;
+  min-height: 100vh;
+}
+
+@media print {
+  .App {
+    padding-top: 0;
+  }
 }
 
 .App-logo {
@@ -21,7 +30,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -35,4 +43,73 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@media print {
+  .toolbar {
+    visibility: hidden;
+  }
+}
+
+.toolbar {
+  z-index: 1;
+  font-family: BrushStrokes;
+  font-weight: 700;
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  border-bottom: 2px solid black;
+  background-color: #346361;
+  animation: drop 0.5s;
+  color: #fed700;
+  text-shadow: 2px 2px black;
+  align-items: center;
+}
+
+@keyframes drop {
+  0% {
+      transform: translateY(-100%);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+
+.toolbar .title {
+  text-align: center;
+  flex-grow: 1;
+  font-size: 20px;
+}
+
+.toolbar .back:hover {
+  transform: translateX(5px);
+}
+
+.toolbar a {
+  color: #fed700;
+  text-decoration: none;
+}
+
+.toolbar .back {
+  flex-basis: 100px;
+  transition: transform 0.3s;
+}
+
+.toolbar .buttons {
+  flex-basis: 100px;
+  text-align: right;
+}
+
+.toolbar .buttons a {
+  display: inline-block;
+  margin: 0 5px;
+  transition: transform 0.3s;
+  transform: scale(1);
+}
+
+.toolbar .buttons a:hover {
+  transform: scale(1.25);
 }
