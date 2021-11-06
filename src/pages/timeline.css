@@ -19,6 +19,8 @@
     width: 1000px;
     display: inline-block;
     border: 2px solid black;
+    border-radius: 10px;
+    padding-bottom: 15px;
     margin: 15px;
     white-space: normal;
 }
@@ -50,47 +52,126 @@
     min-width: 10vw;
 }
 
-#timeline .section div h1 {
-    background-repeat: no-repeat;
-    background-position: 5pt;
-    background-size: 30pt;
-    padding-left: 40pt;
-}
-
-#timeline .section div {
+#timeline .section>div {
     text-align: left;
     width: 300px;
     margin: 10px;
     border-radius: 5px;
-    border: 2px solid black;
+    box-shadow: 2px 2px 10px black;
     background-color: #e3dfd4aa;
 }
 
 #timeline .section h1 {
     font-size: 16px;
     padding: 10px;
-    border-bottom: 2px solid black;
     line-height: 24px;
     margin: 0;
     color: #FFFFFF;
-    background-color: #346361;
+}
+
+.section div .title {
+    display: flex;
+    border-bottom: 2ps solid black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.section div .title .clan {
+    background-size: 35px;
+    background-position: center;
+}
+
+.section div .title.crab {
+    background-color: #A19AA2;
+}
+
+.section div .title.crab .clan {
+    background-image: url("../assets/Crab_Mon.png");
+}
+
+
+.section div .title.crane {
+    background-color: #A8B9CB;
+}
+
+.section div .title.crane .clan {
+    background-image: url("../assets/Crane_Mon.png");
+}
+
+.section div .title.dragon {
+    background-color: #8CA295;
+}
+
+.section div .title.dragon .clan {
+    background-image: url("../assets/Dragon_Mon.png");
+}
+
+.section div .title.lion {
+    background-color: #CBB07C;
+}
+
+.section div .title.lion .clan {
+    background-image: url("../assets/Lion_Mon.png");
+}
+
+.section div .title.phoenix {
+    background-color: #DB9D67;
+}
+
+.section div .title.phoenix .clan {
+    background-image: url("../assets/Phoenix_Mon.png");
+}
+
+.section div .title.scorpion {
+    background-color: #BE9789;
+}
+
+.section div .title.scorpion .clan {
+    background-image: url("../assets/Scorpion_Mon.png");
+}
+
+.section div .title.unicorn {
+    background-color: #AEA2B8;
+}
+
+.section div .title.unicorn .clan {
+    background-image: url("../assets/Unicorn_Mon.png");
+}
+
+.section div.shadowlands {
+    background-color: black;
+}
+
+.section div .title h1 {
+    flex-grow: 1;
+    border: none !important;
+}
+
+.section div .title>div {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+}
+
+.section.bushi div .title .role {
+    background-image: url('../assets/Bushi_Icon.png');
+}
+.section.courtier div .title .role {
+    background-image: url('../assets/Courtier_Icon.png');
+}
+.section.shugenja div .title .role {
+    background-image: url('../assets/Shugenja_Icon.png');
+}
+.section.shinobi div .title .role {
+    background-size: 35px !important;
+    background-image: url('../assets/Shinobi_Icon.png');
 }
 
 #timeline .section p {
     margin: 0;
     padding: 10px;
-}
-
-.section.bushi div h1 {
-    background-image: url('../assets/Bushi_Icon.png');
-}
-.section.courtier div h1 {
-    background-image: url('../assets/Courtier_Icon.png');
-}
-.section.shugenja div h1 {
-    background-image: url('../assets/Shugenja_Icon.png');
-}
-.section.shinobi div h1 {
-    background-size: 25pt !important;
-    background-image: url('../assets/Shinobi_Icon.png');
 }

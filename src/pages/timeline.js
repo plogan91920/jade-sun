@@ -93,7 +93,7 @@ class Timeline extends React.Component {
 
     sanitize(data) {
         return data.map(encounter => {
-            return {"year": encounter.Year, "season": encounter.Season, "title": encounter.Title, "text": encounter.Text}
+            return {"year": encounter.Year, "region": encounter.Region.toLowerCase(), "season": encounter.Season, "title": encounter.Title, "text": encounter.Text}
         });
     }
 
@@ -102,11 +102,29 @@ class Timeline extends React.Component {
 
         data.forEach(card => {
             if (card.season && typeof card.season == "string" && (card.season.toLowerCase() === "spring" || card.season.toLowerCase() === "summer" || card.season.toLowerCase() === "fall") && card.year) {
-                years[parseInt(card.year) - 1][card.season.toLowerCase()][role].push({title: card.title, text: card.text})
+                years[parseInt(card.year) - 1][card.season.toLowerCase()][role].push({title: card.title, text: card.text, region: card.region})
             }
         });
 
         this.setState({years: years})
+    }
+
+    showCards(year, season, role) {
+        return <div class={"section " + role}>
+            {
+                year[season][role].map((card, i) => {
+                    console.log(card)
+                    return <div key={i}>
+                        <div class={"title " + card.region}>
+                            <div class="role"/>
+                            <h1>{card.title}</h1>
+                            <div class="clan"/>
+                        </div>
+                        <p>{card.text}</p>
+                    </div>
+                })
+            }
+        </div>
     }
 
     render() {
@@ -124,132 +142,36 @@ class Timeline extends React.Component {
                                     <h1>Year {i + 1}</h1>
                                     <div class="season">
                                         <h2>Spring</h2>
-                                        <div class="section bushi">
-                                            {
-                                                year.spring.bushi.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section courtier">
-                                            {
-                                                year.spring.courtier.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section shugenja">
-                                            {
-                                                year.spring.shugenja.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section shinobi">
-                                            {
-                                                year.spring.shinobi.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
+                                        {
+                                            [
+                                                this.showCards(year, "spring", "bushi"),
+                                                this.showCards(year, "spring", "courtier"),
+                                                this.showCards(year, "spring", "shugenja"),
+                                                this.showCards(year, "spring", "shinobi")
+                                            ]
+                                        }
                                     </div>
                                     <div class="season">
                                         <h2>Summer</h2>
-                                        <div class="section bushi">
-                                            {
-                                                year.summer.bushi.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section courtier">
-                                            {
-                                                year.summer.courtier.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section shugenja">
-                                            {
-                                                year.summer.shugenja.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section shinobi">
-                                            {
-                                                year.summer.shinobi.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
+                                        {
+                                            [
+                                                this.showCards(year, "summer", "bushi"),
+                                                this.showCards(year, "summer", "courtier"),
+                                                this.showCards(year, "summer", "shugenja"),
+                                                this.showCards(year, "summer", "shinobi")
+                                            ]
+                                        }
                                     </div>
                                     <div class="season">
                                         <h2>Fall</h2>
-                                        <div class="section bushi">
-                                            {
-                                                year.fall.bushi.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section courtier">
-                                            {
-                                                year.fall.courtier.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section shugenja">
-                                            {
-                                                year.fall.shugenja.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                        <div class="section shinobi">
-                                            {
-                                                year.fall.shinobi.map((card, i) => {
-                                                    return <div key={i}>
-                                                        <h1>{card.title}</h1>
-                                                        <p>{card.text}</p>
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
+                                        {
+                                            [
+                                                this.showCards(year, "fall", "bushi"),
+                                                this.showCards(year, "fall", "courtier"),
+                                                this.showCards(year, "fall", "shugenja"),
+                                                this.showCards(year, "fall", "shinobi")
+                                            ]
+                                        }
                                     </div>
                                 </div>
                             })
