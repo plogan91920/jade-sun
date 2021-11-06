@@ -69,14 +69,23 @@ class Timeline extends React.Component {
             }
         ]}
     }
-
+    
     componentDidMount() {
-        fetchSheet("2PACX-1vQj3xNfZ2mIPanE8vj3xsU02xjSF4NtMOH5lH3gQECybr4CUpkHYK2h2zQ0-V65XFqcNRWbuhNfaHMG").then(data => {
-            this.processData("shugenja", data)
-            this.setState({loaded:true})
+        fetchSheet("2PACX-1vTgbS6p3traI3aoROU6F_jbTKY5hFUYYcbASsOCwFwgihvYj01XVSEs5xqSdayTx0EJAhVlhaKr18sW").then(bushiData => {
+            this.processData("bushi", bushiData)
+            fetchSheet("2PACX-1vSkR7IVh4xhOAglEQRUJOY3UXKhwmIbl7WbWTOYw2jOcaVTwQeZb-TDQUWM0m9-TKyPS_m8SDPGk0j5").then(courtierData => {
+                this.processData("courtier", courtierData)
+                fetchSheet("2PACX-1vQj3xNfZ2mIPanE8vj3xsU02xjSF4NtMOH5lH3gQECybr4CUpkHYK2h2zQ0-V65XFqcNRWbuhNfaHMG").then(shugenjaData => {
+                    this.processData("shugenja", shugenjaData)
+                    fetchSheet("2PACX-1vQQaSnLqqAcBXVLQtNPWdFT94lDfZgMRRdESJAA3gKdKuPtdHpIUSTbr1NzCMYHIrPIRdC5rpHkB0Ps").then(shinobiData => {
+                        this.processData("shinobi", shinobiData)
+                        this.setState({loaded:true})
+                    })
+                })
+            })
         })
     }
-
+    
     processData(role, data) {
         data = this.sanitize(data)
         this.processStories(role, data)
@@ -84,18 +93,7 @@ class Timeline extends React.Component {
 
     sanitize(data) {
         return data.map(encounter => {
-            var challenges = []
-
-            //Challenge
-            for (var i = 1; i <= 6; i++) {
-                if (encounter["Challenge " + i + " Keywords"] && encounter["Challenge " + i + " Difficulty"] && encounter["Challenge " + i + " Consequence"]) {
-                    var challenge = {keywords: [...encounter["Challenge " + i + " Keywords"].split("-")], difficulty:  encounter["Challenge " + i + " Difficulty"], consequence:  encounter["Challenge " + i + " Consequence"]}
-                    challenge.keywords = challenge.keywords.map(keyword => {return keyword.trim()})
-                    challenges.push(challenge)
-                }
-            }
-
-            return {"year": encounter.Year, "season": encounter.Season, "region": encounter.Region, "title": encounter.Title, "rumor": encounter.Rumor, "text": encounter.Text, "challenges": challenges}
+            return {"year": encounter.Year, "season": encounter.Season, "title": encounter.Title, "text": encounter.Text}
         });
     }
 
@@ -103,7 +101,7 @@ class Timeline extends React.Component {
         var years = this.state.years
 
         data.forEach(card => {
-            if (card.season && card.year) {
+            if (card.season && typeof card.season == "string" && (card.season.toLowerCase() == "spring" || card.season.toLowerCase() == "summer" || card.season.toLowerCase() == "fall") && card.year) {
                 years[parseInt(card.year) - 1][card.season.toLowerCase()][role].push({title: card.title, text: card.text})
             }
         });
