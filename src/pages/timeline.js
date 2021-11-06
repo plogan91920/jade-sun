@@ -101,7 +101,7 @@ class Timeline extends React.Component {
         var years = this.state.years
 
         data.forEach(card => {
-            if (card.season && typeof card.season == "string" && (card.season.toLowerCase() == "spring" || card.season.toLowerCase() == "summer" || card.season.toLowerCase() == "fall") && card.year) {
+            if (card.season && typeof card.season == "string" && (card.season.toLowerCase() === "spring" || card.season.toLowerCase() === "summer" || card.season.toLowerCase() === "fall") && card.year) {
                 years[parseInt(card.year) - 1][card.season.toLowerCase()][role].push({title: card.title, text: card.text})
             }
         });
