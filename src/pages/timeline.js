@@ -6,6 +6,7 @@ import "./timeline.css"
 class Timeline extends React.Component {
     constructor() {
         super()
+        this.filters = [];
         this.state = {loaded: false, years:[
             {
                 spring:{
@@ -113,7 +114,6 @@ class Timeline extends React.Component {
         return <div class={"section " + role}>
             {
                 year[season][role].map((card, i) => {
-                    console.log(card)
                     return <div key={i}>
                         <div class={"title " + card.region}>
                             <div class="role"/>
@@ -127,7 +127,31 @@ class Timeline extends React.Component {
         </div>
     }
 
+    toggleFilter(filter) {
+        this.setState({loading: true})
+        if (this.filters.includes(filter))
+            this.filters.splice(this.filters.indexOf(filter), 1)
+        else
+            this.filters.push(filter)
+
+        //Update Content
+        this.setState({loading: false})
+    }
+
     render() {
+        var bushiSelected = (this.filters.length === 0 || this.filters.indexOf("bushi") >= 0 ? "selected" : "")
+        var courtierSelected = (this.filters.length === 0 || this.filters.indexOf("courtier") >= 0 ? "selected" : "")
+        var shugenjaSelected = (this.filters.length === 0 || this.filters.indexOf("shugenja") >= 0 ? "selected" : "")
+        var shinobiSelected = (this.filters.length === 0 || this.filters.indexOf("shinobi") >= 0 ? "selected" : "")
+
+        var crabSelected = (this.filters.length === 0 || this.filters.indexOf("crab") >= 0 ? "selected" : "")
+        var craneSelected = (this.filters.length === 0 || this.filters.indexOf("crane") >= 0 ? "selected" : "")
+        var dragonSelected = (this.filters.length === 0 || this.filters.indexOf("dragon") >= 0 ? "selected" : "")
+        var lionSelected = (this.filters.length === 0 || this.filters.indexOf("lion") >= 0 ? "selected" : "")
+        var phoenixSelected = (this.filters.length === 0 || this.filters.indexOf("phoenix") >= 0 ? "selected" : "")
+        var scorpionSelected = (this.filters.length === 0 || this.filters.indexOf("scorpion") >= 0 ? "selected" : "")
+        var unicornSelected = (this.filters.length === 0 || this.filters.indexOf("unicorn") >= 0 ? "selected" : "")
+
         if (this.state.loaded)
             return (
                 <div id="timeline">
@@ -136,6 +160,23 @@ class Timeline extends React.Component {
                         <div class="title">Jade&nbsp;&nbsp;Sun&nbsp;&nbsp;Timeline</div>
                     </div>
                     <div id="timeline-summary">
+                        <div id="filters">
+                            <div class="group">
+                                <div onClick={() => this.toggleFilter("bushi")} class={"filter bushi " + bushiSelected}></div>
+                                <div onClick={() => this.toggleFilter("courtier")} class={"filter courtier " + courtierSelected}></div>
+                                <div onClick={() => this.toggleFilter("shugenja")} class={"filter shugenja " + shugenjaSelected}></div>
+                                <div onClick={() => this.toggleFilter("shinobi")} class={"filter shinobi " + shinobiSelected}></div>
+                            </div>
+                            <div class="group">
+                                <div onClick={() => this.toggleFilter("crab")} class={"filter crab " + crabSelected}></div>
+                                <div onClick={() => this.toggleFilter("crane")} class={"filter crane " + craneSelected}></div>
+                                <div onClick={() => this.toggleFilter("dragon")} class={"filter dragon " + dragonSelected}></div>
+                                <div onClick={() => this.toggleFilter("lion")} class={"filter lion " + lionSelected}></div>
+                                <div onClick={() => this.toggleFilter("phoenix")} class={"filter phoenix " + phoenixSelected}></div>
+                                <div onClick={() => this.toggleFilter("scorpion")} class={"filter scorpion " + scorpionSelected}></div>
+                                <div onClick={() => this.toggleFilter("unicorn")} class={"filter unicorn " + unicornSelected}></div>
+                            </div>
+                        </div>
                         {
                             this.state.years.map((year, i) => {
                                 return <div class="year" key={i}>

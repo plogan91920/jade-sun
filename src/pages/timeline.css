@@ -1,7 +1,7 @@
 #timeline-summary {
     padding-top: 40px;
     white-space: nowrap;
-    text-align: center;
+    text-align: left;
 }
 
 #timeline {
@@ -16,21 +16,24 @@
 }
 
 #timeline .year {
+    text-align: center;
     width: 1000px;
     display: inline-block;
-    border: 2px solid black;
+    box-shadow: 0 0 10px black;
     border-radius: 10px;
     padding-bottom: 15px;
     margin: 15px;
     white-space: normal;
 }
 
-#timeline .year h1 {
+#timeline .year>h1 {
+    margin: 0;
     text-align: center;
-    margin-bottom: 0;
-    padding-left: 20px;
-    padding-bottom: 20px;
-    border-bottom: 3px solid gray;
+    padding: 20px;
+    background-color: #346361;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
 }
 
 #timeline .year:not(:first-child) {
@@ -62,6 +65,7 @@
 }
 
 #timeline .section h1 {
+    text-align: center;
     font-size: 16px;
     padding: 10px;
     line-height: 24px;
@@ -174,4 +178,90 @@
 #timeline .section p {
     margin: 0;
     padding: 10px;
+}
+
+#filters {
+    display: flex;
+
+}
+
+#filters .group {
+    text-align: center;
+    margin: 25px 15px 5px;
+}
+
+#filters .filter {
+    display: inline-block;
+    margin: 5px;
+    border-radius: 50%;
+    border: 3px solid black;
+    background-color: white;
+    background-position: center;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s;
+}
+
+#filters .filter:not(.selected) {
+    opacity: 0.5;
+}
+
+#filters .filter:hover {
+    transform: translateY(-5px);
+}
+
+#filters .filter.bushi {
+    background-image:url("../assets/Bushi_Icon.png");
+    background-size: 35px;
+}
+
+#filters .filter.courtier {
+    background-image:url("../assets/Courtier_Icon.png");
+    background-size: 35px;
+}
+
+#filters .filter.shugenja {
+    background-image:url("../assets/Shugenja_Icon.png");
+    background-size: 35px;
+}
+
+#filters .filter.shinobi {
+    background-image:url("../assets/Shinobi_Icon.png");
+}
+
+#filters .filter.crab {
+    background-image:url("../assets/Crab_Mon.png");
+    background-color: #A19AA2;
+}
+
+#filters .filter.crane {
+    background-image:url("../assets/Crane_Mon.png");
+    background-color: #A8B9CB;
+}
+
+#filters .filter.dragon {
+    background-image:url("../assets/Dragon_Mon.png");
+    background-color: #8CA295;
+}
+
+#filters .filter.lion {
+    background-image:url("../assets/Lion_Mon.png");
+    background-color: #CBB07C;
+}
+
+#filters .filter.phoenix {
+    background-image:url("../assets/Phoenix_Mon.png");
+    background-color: #DB9D67;
+}
+
+#filters .filter.scorpion {
+    background-image:url("../assets/Scorpion_Mon.png");
+    background-color: #BE9789;
+}
+
+#filters .filter.unicorn {
+    background-image:url("../assets/Unicorn_Mon.png");
+    background-color: #AEA2B8;
 }
