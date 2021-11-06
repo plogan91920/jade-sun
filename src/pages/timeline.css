@@ -71,6 +71,7 @@
 
 .section div .title {
     display: flex;
+    align-items: center;
     border-bottom: 2ps solid black;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -88,7 +89,6 @@
 .section div .title.crab .clan {
     background-image: url("../assets/Crab_Mon.png");
 }
-
 
 .section div .title.crane {
     background-color: #A8B9CB;
