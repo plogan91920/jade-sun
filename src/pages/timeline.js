@@ -6,7 +6,8 @@ import "./timeline.css"
 class Timeline extends React.Component {
     constructor() {
         super()
-        this.filters = [];
+        this.roleFilters = [];
+        this.clanFilters = [];
         this.state = {loaded: false, years:[
             {
                 spring:{
@@ -127,30 +128,41 @@ class Timeline extends React.Component {
         </div>
     }
 
-    toggleFilter(filter) {
+    toggleRoleFilter(filter) {
         this.setState({loading: true})
-        if (this.filters.includes(filter))
-            this.filters.splice(this.filters.indexOf(filter), 1)
+        if (this.roleFilters.includes(filter))
+            this.roleFilters.splice(this.roleFilters.indexOf(filter), 1)
         else
-            this.filters.push(filter)
+            this.roleFilters.push(filter)
+
+        //Update Content
+        this.setState({loading: false})
+    }
+
+    toggleClanFilter(filter) {
+        this.setState({loading: true})
+        if (this.clanFilters.includes(filter))
+            this.clanFilters.splice(this.clanFilters.indexOf(filter), 1)
+        else
+            this.clanFilters.push(filter)
 
         //Update Content
         this.setState({loading: false})
     }
 
     render() {
-        var bushiSelected = (this.filters.length === 0 || this.filters.indexOf("bushi") >= 0 ? "selected" : "")
-        var courtierSelected = (this.filters.length === 0 || this.filters.indexOf("courtier") >= 0 ? "selected" : "")
-        var shugenjaSelected = (this.filters.length === 0 || this.filters.indexOf("shugenja") >= 0 ? "selected" : "")
-        var shinobiSelected = (this.filters.length === 0 || this.filters.indexOf("shinobi") >= 0 ? "selected" : "")
+        var bushiSelected = (this.roleFilters.length === 0 || this.roleFilters.indexOf("bushi") >= 0 ? "selected" : "")
+        var courtierSelected = (this.roleFilters.length === 0 || this.roleFilters.indexOf("courtier") >= 0 ? "selected" : "")
+        var shugenjaSelected = (this.roleFilters.length === 0 || this.roleFilters.indexOf("shugenja") >= 0 ? "selected" : "")
+        var shinobiSelected = (this.roleFilters.length === 0 || this.roleFilters.indexOf("shinobi") >= 0 ? "selected" : "")
 
-        var crabSelected = (this.filters.length === 0 || this.filters.indexOf("crab") >= 0 ? "selected" : "")
-        var craneSelected = (this.filters.length === 0 || this.filters.indexOf("crane") >= 0 ? "selected" : "")
-        var dragonSelected = (this.filters.length === 0 || this.filters.indexOf("dragon") >= 0 ? "selected" : "")
-        var lionSelected = (this.filters.length === 0 || this.filters.indexOf("lion") >= 0 ? "selected" : "")
-        var phoenixSelected = (this.filters.length === 0 || this.filters.indexOf("phoenix") >= 0 ? "selected" : "")
-        var scorpionSelected = (this.filters.length === 0 || this.filters.indexOf("scorpion") >= 0 ? "selected" : "")
-        var unicornSelected = (this.filters.length === 0 || this.filters.indexOf("unicorn") >= 0 ? "selected" : "")
+        var crabSelected = (this.clanFilters.length === 0 || this.clanFilters.indexOf("crab") >= 0 ? "selected" : "")
+        var craneSelected = (this.clanFilters.length === 0 || this.clanFilters.indexOf("crane") >= 0 ? "selected" : "")
+        var dragonSelected = (this.clanFilters.length === 0 || this.clanFilters.indexOf("dragon") >= 0 ? "selected" : "")
+        var lionSelected = (this.clanFilters.length === 0 || this.clanFilters.indexOf("lion") >= 0 ? "selected" : "")
+        var phoenixSelected = (this.clanFilters.length === 0 || this.clanFilters.indexOf("phoenix") >= 0 ? "selected" : "")
+        var scorpionSelected = (this.clanFilters.length === 0 || this.clanFilters.indexOf("scorpion") >= 0 ? "selected" : "")
+        var unicornSelected = (this.clanFilters.length === 0 || this.clanFilters.indexOf("unicorn") >= 0 ? "selected" : "")
 
         if (this.state.loaded)
             return (
@@ -162,19 +174,19 @@ class Timeline extends React.Component {
                     <div id="timeline-summary">
                         <div id="filters">
                             <div class="group">
-                                <div onClick={() => this.toggleFilter("bushi")} class={"filter bushi " + bushiSelected}></div>
-                                <div onClick={() => this.toggleFilter("courtier")} class={"filter courtier " + courtierSelected}></div>
-                                <div onClick={() => this.toggleFilter("shugenja")} class={"filter shugenja " + shugenjaSelected}></div>
-                                <div onClick={() => this.toggleFilter("shinobi")} class={"filter shinobi " + shinobiSelected}></div>
+                                <div onClick={() => this.toggleRoleFilter("bushi")} class={"filter bushi " + bushiSelected}></div>
+                                <div onClick={() => this.toggleRoleFilter("courtier")} class={"filter courtier " + courtierSelected}></div>
+                                <div onClick={() => this.toggleRoleFilter("shugenja")} class={"filter shugenja " + shugenjaSelected}></div>
+                                <div onClick={() => this.toggleRoleFilter("shinobi")} class={"filter shinobi " + shinobiSelected}></div>
                             </div>
                             <div class="group">
-                                <div onClick={() => this.toggleFilter("crab")} class={"filter crab " + crabSelected}></div>
-                                <div onClick={() => this.toggleFilter("crane")} class={"filter crane " + craneSelected}></div>
-                                <div onClick={() => this.toggleFilter("dragon")} class={"filter dragon " + dragonSelected}></div>
-                                <div onClick={() => this.toggleFilter("lion")} class={"filter lion " + lionSelected}></div>
-                                <div onClick={() => this.toggleFilter("phoenix")} class={"filter phoenix " + phoenixSelected}></div>
-                                <div onClick={() => this.toggleFilter("scorpion")} class={"filter scorpion " + scorpionSelected}></div>
-                                <div onClick={() => this.toggleFilter("unicorn")} class={"filter unicorn " + unicornSelected}></div>
+                                <div onClick={() => this.toggleClanFilter("crab")} class={"filter crab " + crabSelected}></div>
+                                <div onClick={() => this.toggleClanFilter("crane")} class={"filter crane " + craneSelected}></div>
+                                <div onClick={() => this.toggleClanFilter("dragon")} class={"filter dragon " + dragonSelected}></div>
+                                <div onClick={() => this.toggleClanFilter("lion")} class={"filter lion " + lionSelected}></div>
+                                <div onClick={() => this.toggleClanFilter("phoenix")} class={"filter phoenix " + phoenixSelected}></div>
+                                <div onClick={() => this.toggleClanFilter("scorpion")} class={"filter scorpion " + scorpionSelected}></div>
+                                <div onClick={() => this.toggleClanFilter("unicorn")} class={"filter unicorn " + unicornSelected}></div>
                             </div>
                         </div>
                         {
