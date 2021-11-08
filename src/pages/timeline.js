@@ -8,6 +8,8 @@ class Timeline extends React.Component {
         super()
         this.roleFilters = [];
         this.clanFilters = [];
+        this.data = [];
+        this.focusElement = null;
         this.state = {loaded: false, years:[
             {
                 spring:{
@@ -74,37 +76,115 @@ class Timeline extends React.Component {
     
     componentDidMount() {
         fetchSheet("2PACX-1vTgbS6p3traI3aoROU6F_jbTKY5hFUYYcbASsOCwFwgihvYj01XVSEs5xqSdayTx0EJAhVlhaKr18sW").then(bushiData => {
-            this.processData("bushi", bushiData)
+            this.cleanData("bushi", bushiData)
             fetchSheet("2PACX-1vSkR7IVh4xhOAglEQRUJOY3UXKhwmIbl7WbWTOYw2jOcaVTwQeZb-TDQUWM0m9-TKyPS_m8SDPGk0j5").then(courtierData => {
-                this.processData("courtier", courtierData)
+                this.cleanData("courtier", courtierData)
                 fetchSheet("2PACX-1vQj3xNfZ2mIPanE8vj3xsU02xjSF4NtMOH5lH3gQECybr4CUpkHYK2h2zQ0-V65XFqcNRWbuhNfaHMG").then(shugenjaData => {
-                    this.processData("shugenja", shugenjaData)
+                    this.cleanData("shugenja", shugenjaData)
                     fetchSheet("2PACX-1vQQaSnLqqAcBXVLQtNPWdFT94lDfZgMRRdESJAA3gKdKuPtdHpIUSTbr1NzCMYHIrPIRdC5rpHkB0Ps").then(shinobiData => {
-                        this.processData("shinobi", shinobiData)
-                        this.setState({loaded:true})
+                        this.cleanData("shinobi", shinobiData)
+                        this.filterData()
+                        this.setState({loaded: true})
                     })
                 })
             })
         })
     }
+
+    filterData() {
+        var filtered = [...this.data]
+        //Fade irrelevant stories
+
+        //Filter events
+        filtered = filtered.filter(elem => {
+            //keep if it matches or no filters
+            return (this.roleFilters.length === 0 || this.roleFilters.includes(elem.role)) && (this.clanFilters.length === 0 || this.clanFilters.includes(elem.region))
+        })
+
+        this.processStories(filtered)
+    }
     
-    processData(role, data) {
-        data = this.sanitize(data)
-        this.processStories(role, data)
+    cleanData(role, data) {
+        data = this.sanitize(role, data)
+        
+        data.forEach(card => {
+            this.data.push(card)
+        })
     }
 
-    sanitize(data) {
+    sanitize(role, data) {
         return data.map(encounter => {
-            return {"year": encounter.Year, "region": encounter.Region.toLowerCase(), "season": encounter.Season, "title": encounter.Title, "text": encounter.Text}
+            return {"role": role, "year": encounter.Year, "region": encounter.Region.toLowerCase(), "season": encounter.Season, "title": encounter.Title, "text": encounter.Text, "faded": false}
         });
     }
 
-    processStories(role, data) {
-        var years = this.state.years
+    processStories(data) {
+        var years = [
+            {
+                spring:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                },
+                summer:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                },
+                fall:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                }
+            },
+            {
+                spring:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                },
+                summer:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                },
+                fall:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                }
+            },
+            {
+                spring:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                },
+                summer:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                },
+                fall:{
+                    bushi: [],
+                    courtier: [],
+                    shugenja: [],
+                    shinobi: []
+                }
+            }
+        ]
 
         data.forEach(card => {
             if (card.season && typeof card.season == "string" && (card.season.toLowerCase() === "spring" || card.season.toLowerCase() === "summer" || card.season.toLowerCase() === "fall") && card.year) {
-                years[parseInt(card.year) - 1][card.season.toLowerCase()][role].push({title: card.title, text: card.text, region: card.region})
+                years[parseInt(card.year) - 1][card.season.toLowerCase()][card.role].push({title: card.title, text: card.text, region: card.region})
             }
         });
 
@@ -129,25 +209,23 @@ class Timeline extends React.Component {
     }
 
     toggleRoleFilter(filter) {
-        this.setState({loading: true})
         if (this.roleFilters.includes(filter))
             this.roleFilters.splice(this.roleFilters.indexOf(filter), 1)
         else
             this.roleFilters.push(filter)
 
         //Update Content
-        this.setState({loading: false})
+        this.filterData()
     }
 
     toggleClanFilter(filter) {
-        this.setState({loading: true})
         if (this.clanFilters.includes(filter))
             this.clanFilters.splice(this.clanFilters.indexOf(filter), 1)
         else
             this.clanFilters.push(filter)
 
         //Update Content
-        this.setState({loading: false})
+        this.filterData()
     }
 
     render() {
